@@ -15,12 +15,17 @@
             padding: 0;
         }
 
+        /* Rolagem suave */
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: #09090b;
             color: #e1e1e6;
             line-height: 1.7;
-            /* Padrão de fundo sutil (Grid) */
+            /* Fundo com Grid sutil */
             background-image: 
                 linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
@@ -56,13 +61,27 @@
             color: #71717a;
             font-size: 1.1rem;
             letter-spacing: 1px;
+            margin-bottom: 5px;
         }
+
+        .hint {
+            display: inline-block;
+            margin-top: 15px;
+            font-size: 0.85rem;
+            color: #52525b;
+            border: 1px solid #27272a;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(0,0,0,0.3);
+        }
+
+        .hint span { color: #a1a1aa; font-weight: bold; }
 
         /* --- Container --- */
         .container {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 0 20px 60px 20px;
+            padding: 0 20px 80px 20px;
             display: flex;
             flex-direction: column;
             gap: 50px;
@@ -78,19 +97,19 @@
             transition: transform 0.4s ease, box-shadow 0.4s ease;
             backdrop-filter: blur(5px);
             animation: slideUp 0.8s ease-out forwards;
-            opacity: 0; /* Inicia invisível para a animação funcionar */
+            opacity: 0; /* Para animação */
         }
 
-        /* Efeito de brilho colorido no hover */
         .card:hover {
             transform: translateY(-8px) scale(1.01);
         }
         
+        /* Efeitos de brilho no hover por cor */
         .theme-purple:hover { box-shadow: 0 0 40px rgba(168, 85, 247, 0.3); border-color: rgba(168, 85, 247, 0.3); }
         .theme-blue:hover   { box-shadow: 0 0 40px rgba(59, 130, 246, 0.3); border-color: rgba(59, 130, 246, 0.3); }
         .theme-pink:hover   { box-shadow: 0 0 40px rgba(236, 72, 153, 0.3); border-color: rgba(236, 72, 153, 0.3); }
 
-        /* Atraso na animação para efeito cascata */
+        /* Atraso na animação (efeito cascata) */
         .card:nth-child(1) { animation-delay: 0.2s; }
         .card:nth-child(2) { animation-delay: 0.4s; }
         .card:nth-child(3) { animation-delay: 0.6s; }
@@ -102,12 +121,10 @@
             justify-content: space-between;
             align-items: center;
             color: white;
-            position: relative;
-            overflow: hidden;
             border-bottom: 1px solid rgba(0,0,0,0.2);
         }
 
-        /* Cores Fortes para cada apresentador */
+        /* Cores Fortes */
         .theme-purple .card-header { background: linear-gradient(135deg, #6d28d9, #a855f7); }
         .theme-blue .card-header   { background: linear-gradient(135deg, #1d4ed8, #3b82f6); }
         .theme-pink .card-header   { background: linear-gradient(135deg, #be185d, #ec4899); }
@@ -149,6 +166,7 @@
         /* --- Conteúdo do Card --- */
         .card-body {
             padding: 35px;
+            position: relative;
         }
 
         .card-body p {
@@ -162,7 +180,7 @@
             font-weight: 600;
         }
 
-        /* --- Exemplos Estilo "Terminal" --- */
+        /* --- Exemplos Estilo Terminal --- */
         .example-box {
             background: #000;
             border-radius: 8px;
@@ -172,11 +190,9 @@
             transition: background 0.3s;
         }
         
-        .example-box:hover {
-            background: #0a0a0a;
-        }
+        .example-box:hover { background: #0a0a0a; }
 
-        /* Bordas laterais coloridas nos exemplos */
+        /* Bordas laterais coloridas */
         .theme-purple .example-box { border-left-color: #a855f7; }
         .theme-blue .example-box   { border-left-color: #3b82f6; }
         .theme-pink .example-box   { border-left-color: #ec4899; }
@@ -194,7 +210,7 @@
             border-radius: 4px;
         }
 
-        /* Destaques coloridos no texto */
+        /* Destaques coloridos */
         .theme-purple .highlight { background: rgba(168, 85, 247, 0.2); color: #d8b4fe; }
         .theme-blue .highlight   { background: rgba(59, 130, 246, 0.2); color: #93c5fd; }
         .theme-pink .highlight   { background: rgba(236, 72, 153, 0.2); color: #f9a8d4; }
@@ -226,12 +242,10 @@
             transition: transform 0.3s;
         }
         
-        .compare-card:hover {
-            transform: translateY(-3px);
-        }
+        .compare-card:hover { transform: translateY(-3px); }
 
         /* Tema ROSA para a comparação */
-        .compare-restritiva { border-top-color: #f472b6; } /* Rosa médio/claro */
+        .compare-restritiva { border-top-color: #f472b6; } /* Rosa claro */
         .compare-explicativa { border-top-color: #be185d; } /* Rosa escuro */
 
         .compare-title {
@@ -241,14 +255,11 @@
             display: block;
         }
         
-        /* Textos em tons de ROSA */
         .text-pink-light { color: #f9a8d4; } 
-        .text-pink-dark { color: #f472b6; }  
+        .text-pink-dark { color: #f472b6; }
 
         /* --- Listas --- */
-        ul.custom-list {
-            list-style: none;
-        }
+        ul.custom-list { list-style: none; }
         ul.custom-list li {
             padding-left: 25px;
             position: relative;
@@ -270,12 +281,13 @@
     <header>
         <h1>Orações Subordinadas Adjetivas</h1>
         <p>Uma jornada pela gramática</p>
+        <div class="hint">Dica: Pressione <span>1</span>, <span>2</span> ou <span>3</span> no teclado para navegar.</div>
     </header>
 
     <div class="container">
 
         <!-- PARTE 1: KAMILA SANTOS (ROXO) -->
-        <div class="card theme-purple">
+        <div id="parte1" class="card theme-purple">
             <div class="card-header">
                 <div class="presenter-info">
                     <span class="presenter-name">Apresentado por Kamila Santos</span>
@@ -296,7 +308,7 @@
         </div>
 
         <!-- PARTE 2: LUAN DHONY (AZUL) -->
-        <div class="card theme-blue">
+        <div id="parte2" class="card theme-blue">
             <div class="card-header">
                 <div class="presenter-info">
                     <span class="presenter-name">Apresentado por Luan Dhony</span>
@@ -325,7 +337,7 @@
         </div>
 
         <!-- PARTE 3: LARISSA RÉGIS (ROSA) -->
-        <div class="card theme-pink">
+        <div id="parte3" class="card theme-pink">
             <div class="card-header">
                 <div class="presenter-info">
                     <span class="presenter-name">Apresentado por Larissa Régis</span>
@@ -359,6 +371,20 @@
         </div>
 
     </div>
+
+    <!-- Script para navegação pelo teclado -->
+    <script>
+        document.addEventListener('keydown', function(event) {
+            // Verifica se a tecla pressionada é 1, 2 ou 3
+            if (event.key === '1') {
+                document.getElementById('parte1').scrollIntoView({ behavior: 'smooth' });
+            } else if (event.key === '2') {
+                document.getElementById('parte2').scrollIntoView({ behavior: 'smooth' });
+            } else if (event.key === '3') {
+                document.getElementById('parte3').scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    </script>
 
 </body>
 </html>
