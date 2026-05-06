@@ -19,14 +19,29 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #09090b;
             color: #e1e1e6;
             line-height: 1.7;
+            min-height: 100vh;
+            position: relative; /* Para o z-index funcionar */
+            /* Fundo semi-transparente para o vídeo aparecer, mas o texto continuar legível */
+            background-color: rgba(9, 9, 11, 0.85); 
+            /* Mantemos a grid por cima do vídeo também */
             background-image: 
                 linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
             background-size: 40px 40px;
-            min-height: 100vh;
+        }
+
+        /* --- Configuração do Vídeo de Fundo --- */
+        #bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Cobre toda a tela sem distorcer */
+            z-index: -1; /* Joga o vídeo para trás de tudo */
+            opacity: 0.6; /* Deixa o vídeo um pouco escuro para não brigar com o texto */
         }
 
         @keyframes slideUp {
@@ -38,7 +53,8 @@
         header {
             padding: 80px 20px;
             text-align: center;
-            background: radial-gradient(circle at center, #1a1a24 0%, #09090b 100%);
+            background: radial-gradient(circle at center, rgba(26, 26, 36, 0.9) 0%, transparent 100%);
+            position: relative;
         }
 
         header h1 {
@@ -61,28 +77,29 @@
             padding: 10px 20px;
             border-radius: 20px;
             background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(4px);
         }
         .hint span { color: #a1a1aa; font-weight: bold; }
 
-        /* --- Container (AUMENTADO) --- */
+        /* --- Container --- */
         .container {
-            max-width: 1200px; /* Aumentei de 1000px para 1200px */
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 30px 100px 30px; /* Mais padding lateral e inferior */
+            padding: 0 30px 100px 30px;
             display: flex;
             flex-direction: column;
-            gap: 60px; /* Maior espaçamento entre cards */
+            gap: 60px;
         }
 
-        /* --- Cards (AUMENTADOS) --- */
+        /* --- Cards --- */
         .card {
-            background: rgba(24, 24, 27, 0.7);
+            background: rgba(24, 24, 27, 0.75); /* Levemente mais transparente para pegar o ambiente */
             border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 24px; /* Bordas um pouco maiores */
+            border-radius: 24px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             transition: transform 0.4s ease, box-shadow 0.4s ease;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px); /* Blur mais forte para destacar do vídeo */
             animation: slideUp 0.8s ease-out forwards;
             opacity: 0;
         }
@@ -99,7 +116,7 @@
 
         /* --- Header do Card --- */
         .card-header {
-            padding: 35px 50px; /* Aumentei o padding horizontal */
+            padding: 35px 50px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -116,7 +133,7 @@
         
         .presenter-role { 
             font-family: 'Space Grotesk', sans-serif; 
-            font-size: 2.5rem; /* Aumentei de 2rem para 2.5rem */
+            font-size: 2.5rem; 
             font-weight: 700; 
             line-height: 1.1; 
             text-shadow: 0 2px 4px rgba(0,0,0,0.2); 
@@ -124,32 +141,32 @@
 
         .part-number {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 5rem; /* Aumentei de 4rem para 5rem */
+            font-size: 5rem;
             font-weight: 800; opacity: 0.2;
             position: absolute; right: 30px; bottom: -15px;
             color: white; z-index: 1;
         }
 
-        /* --- Body (AUMENTADO) --- */
+        /* --- Body --- */
         .card-body { 
-            padding: 50px; /* Aumentei de 35px para 50px */ 
+            padding: 50px; 
         }
         
         .card-body p { 
-            font-size: 1.25rem; /* Aumentei de 1.15rem para 1.25rem */
+            font-size: 1.25rem; 
             margin-bottom: 25px; 
             color: #d4d4d8; 
         }
         
         strong { color: #fff; font-weight: 600; }
 
-        /* --- Exemplos --- */
+        /* --- Exemplos e Listas --- */
         .example-box {
-            background: #000;
+            background: rgba(0, 0, 0, 0.6); /* Fundo preto mais sólido para contraste */
             border-radius: 10px;
-            padding: 25px 30px; /* Aumentei padding */
+            padding: 20px 25px;
             margin: 20px 0;
-            border-left: 6px solid transparent; /* Borda mais grossa */
+            border-left: 6px solid transparent;
         }
         
         .theme-purple .example-box { border-left-color: #a855f7; }
@@ -158,7 +175,7 @@
 
         .example-sentence { 
             font-family: 'Space Grotesk', sans-serif; 
-            font-size: 1.8rem; /* Aumentei de 1.5rem para 1.8rem */
+            font-size: 1.5rem; 
             color: #fff; 
             margin-bottom: 10px; 
         }
@@ -168,7 +185,20 @@
         .theme-blue .highlight   { background: rgba(59, 130, 246, 0.2); color: #93c5fd; }
         .theme-pink .highlight   { background: rgba(236, 72, 153, 0.2); color: #f9a8d4; }
 
-        .explanation-text { font-size: 1.05rem; color: #71717a; font-style: italic; }
+        .explanation-text { font-size: 1.05rem; color: #a1a1aa; font-style: italic; }
+
+        ul.custom-list { list-style: none; }
+        ul.custom-list li { 
+            padding-left: 30px; 
+            position: relative; 
+            margin-bottom: 15px; 
+            color: #ccc; 
+            font-size: 1.25rem; 
+        }
+        ul.custom-list li::before { content: '→'; position: absolute; left: 0; font-size: 1.25rem; }
+        
+        .theme-purple ul.custom-list li::before { color: #a855f7; }
+        .theme-blue ul.custom-list li::before   { color: #3b82f6; }
 
         /* --- Comparação --- */
         .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px; }
@@ -178,11 +208,12 @@
             .presenter-role { font-size: 1.8rem; }
             .card-body { padding: 30px; }
             .card-header { padding: 25px 30px; }
+            ul.custom-list li { font-size: 1.1rem; }
         }
 
         .compare-card {
-            background: rgba(39, 39, 42, 0.5);
-            padding: 30px; /* Aumentei de 20px para 30px */
+            background: rgba(39, 39, 42, 0.6);
+            padding: 30px;
             border-radius: 16px;
             border-top: 5px solid transparent;
         }
@@ -193,16 +224,15 @@
         .compare-title { font-weight: 700; font-size: 1.3rem; margin-bottom: 15px; display: block; }
         .text-pink-light { color: #f9a8d4; } 
         .text-pink-dark { color: #f472b6; }
-
-        /* --- Listas --- */
-        ul.custom-list { list-style: none; }
-        ul.custom-list li { padding-left: 30px; position: relative; margin-bottom: 15px; color: #ccc; font-size: 1.1rem; }
-        ul.custom-list li::before { content: '→'; position: absolute; left: 0; font-size: 1.1rem; }
-        .theme-purple ul.custom-list li::before { color: #a855f7; }
-        .theme-blue ul.custom-list li::before   { color: #3b82f6; }
     </style>
 </head>
 <body>
+
+    <!-- VÍDEO DE FUNDO -->
+    <video autoplay muted loop id="bg-video">
+        <source src="fundo.mp4" type="video/mp4">
+        Seu navegador não suporta vídeo HTML5.
+    </video>
 
     <header>
         <h1>Orações Subordinadas Adjetivas</h1>
@@ -277,7 +307,7 @@
                             <strong>Não usa vírgula.</strong> Restringe ou delimita o substantivo, individualizando-o dentro de um grupo.
                         </p>
                         <div class="example-box" style="margin:0; padding: 20px 25px;">
-                            <div class="example-sentence" style="font-size: 1.5rem;">Os alunos <span class="highlight">que estudam</span> passam.</div>
+                            <div class="example-sentence">Os alunos <span class="highlight">que estudam</span> passam.</div>
                             <div class="explanation-text">
                                 <strong>Sentido:</strong> Apenas uma parte do grupo passa. A oração separa os alunos que estudam dos que não estudam.
                             </div>
@@ -290,7 +320,7 @@
                             <strong>Usa vírgulas.</strong> Acrecenta uma qualidade, explicação ou comentário sobre um ser já identificado.
                         </p>
                         <div class="example-box" style="margin:0; padding: 20px 25px;">
-                            <div class="example-sentence" style="font-size: 1.5rem;">Os alunos, <span class="highlight">que estudam</span>, passam.</div>
+                            <div class="example-sentence">Os alunos, <span class="highlight">que estudam</span>, passam.</div>
                             <div class="explanation-text">
                                 <strong>Sentido:</strong> Todos os alunos passam. O fato de estudarem é apenas uma informação extra acrescentada à frase.
                             </div>
