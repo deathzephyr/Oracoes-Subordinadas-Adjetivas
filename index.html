@@ -53,7 +53,6 @@
             padding: 80px 20px;
             text-align: center;
             background: radial-gradient(circle at center, rgba(26, 26, 36, 0.9) 0%, transparent 100%);
-            position: relative;
         }
 
         header h1 {
@@ -65,7 +64,7 @@
             letter-spacing: 3px;
         }
 
-        header p { color: #71717a; font-size: 1.3rem; letter-spacing: 1px; margin-bottom: 5px; }
+        header p { color: #71717a; font-size: 1.3rem; }
 
         .hint {
             display: inline-block;
@@ -113,7 +112,6 @@
         .card:nth-child(2) { animation-delay: 0.4s; }
         .card:nth-child(3) { animation-delay: 0.6s; }
 
-        /* --- Header do Card --- */
         .card-header {
             padding: 35px 50px;
             display: flex;
@@ -135,7 +133,6 @@
             font-size: 2.5rem; 
             font-weight: 700; 
             line-height: 1.1; 
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2); 
         }
 
         .part-number {
@@ -146,12 +143,10 @@
             color: white; z-index: 1;
         }
 
-        /* --- Body --- */
         .card-body { padding: 50px; }
         .card-body p { font-size: 1.25rem; margin-bottom: 25px; color: #d4d4d8; }
         strong { color: #fff; font-weight: 600; }
 
-        /* --- Exemplos e Listas --- */
         .example-box {
             background: rgba(0, 0, 0, 0.6);
             border-radius: 10px;
@@ -180,7 +175,6 @@
         .theme-purple ul.custom-list li::before { color: #a855f7; }
         .theme-blue ul.custom-list li::before   { color: #3b82f6; }
 
-        /* --- Comparação --- */
         .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px; }
 
         @media (max-width: 768px) {
@@ -205,7 +199,7 @@
         .text-pink-dark { color: #f472b6; }
 
         /* ==========================================
-           NOVO ESTILO: AGRADECIMENTO INCRÍVEL
+           ESTILO ÉPICO: AGRADECIMENTO FINAL
            ========================================== */
         .modal-overlay {
             position: fixed;
@@ -213,15 +207,16 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95);
+            background: radial-gradient(circle at center, #0f0f13 0%, #000000 100%);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 1000;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
             overflow: hidden;
+            perspective: 1000px; /* Para efeitos 3D */
         }
 
         .modal-overlay.active {
@@ -229,32 +224,48 @@
             visibility: visible;
         }
 
-        /* Fundo animado com "bolhas" */
-        .particles {
+        /* Fundo Animado "Aurora Boreal" */
+        .aurora-bg {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
+                radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle, rgba(236, 72, 153, 0.15) 0%, transparent 50%);
+            animation: auroraMove 20s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes auroraMove {
+            0% { transform: translate(-25%, -25%) rotate(0deg); }
+            100% { transform: translate(-25%, -25%) rotate(360deg); }
+        }
+
+        /* Confetti Container */
+        #confetti-container {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden;
-            z-index: 1;
+            pointer-events: none;
+            z-index: 2;
         }
 
-        .particle {
+        .confetti {
             position: absolute;
-            bottom: -100px;
-            width: 20px;
-            height: 20px;
-            background: white;
-            border-radius: 50%;
-            opacity: 0.2;
-            animation: floatUp linear infinite;
+            width: 10px;
+            height: 10px;
+            background: #fff;
+            top: -10px;
+            opacity: 0;
+            animation: confettiFall linear forwards;
         }
 
-        @keyframes floatUp {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-            50% { opacity: 0.4; }
-            100% { transform: translateY(-120vh) rotate(720deg); opacity: 0; }
+        @keyframes confettiFall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
         }
 
         /* Conteúdo Central */
@@ -262,110 +273,156 @@
             position: relative;
             z-index: 10;
             text-align: center;
-            transform: scale(0.7) translateY(50px);
+            transform: scale(0.8);
             opacity: 0;
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
         }
 
         .modal-overlay.active .modal-content {
-            transform: scale(1) translateY(0);
+            transform: scale(1);
             opacity: 1;
         }
 
+        /* Título Gigante e Brilhante */
         .modal-title {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 6rem;
+            font-size: 8rem;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 5px;
-            background: linear-gradient(to right, #a855f7, #3b82f6, #ec4899);
+            letter-spacing: -2px;
+            color: transparent;
+            background: linear-gradient(to right, #fff, #d1d5db);
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 50px rgba(168, 85, 247, 0.5);
-            margin-bottom: 20px;
-            animation: textGlow 3s infinite alternate;
+            position: relative;
+            margin-bottom: 10px;
+            text-shadow: 0 0 80px rgba(255, 255, 255, 0.5);
         }
 
-        @keyframes textGlow {
-            0% { filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.6)); }
-            50% { filter: drop-shadow(0 0 40px rgba(59, 130, 246, 0.8)); }
-            100% { filter: drop-shadow(0 0 20px rgba(236, 72, 153, 0.6)); }
+        /* Efeito de brilho atrás do título */
+        .modal-title::after {
+            content: 'Obrigado';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, #a855f7, #3b82f6, #ec4899);
+            -webkit-background-clip: text;
+            filter: blur(30px);
+            opacity: 0.6;
+            z-index: -1;
+            animation: glowPulse 3s infinite alternate;
+        }
+
+        @keyframes glowPulse {
+            0% { opacity: 0.4; filter: blur(30px); }
+            100% { opacity: 0.8; filter: blur(50px); }
         }
 
         .modal-subtitle {
             font-size: 1.5rem;
             color: #71717a;
             margin-bottom: 60px;
-            letter-spacing: 4px;
+            letter-spacing: 10px;
             text-transform: uppercase;
         }
 
-        /* Créditos do Time */
+        /* Cards de Crédito Flutuantes */
         .credits-container {
             display: flex;
             justify-content: center;
             gap: 40px;
             flex-wrap: wrap;
+            perspective: 1000px;
         }
 
         .credit-card {
+            width: 220px;
+            padding: 30px 20px;
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 30px;
             border-radius: 20px;
-            width: 200px;
-            transition: transform 0.3s, box-shadow 0.3s;
+            backdrop-filter: blur(10px);
+            transform-style: preserve-3d;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+            opacity: 0;
+            animation: cardEnter 0.8s ease-out forwards;
         }
 
         .credit-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-15px) rotateX(10deg) scale(1.05);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
         }
 
-        /* Cores específicas para cada membro no agradecimento */
-        .credit-card.purple { border-top: 4px solid #a855f7; box-shadow: 0 0 20px rgba(168, 85, 247, 0.1); }
-        .credit-card.blue   { border-top: 4px solid #3b82f6; box-shadow: 0 0 20px rgba(59, 130, 246, 0.1); }
-        .credit-card.pink   { border-top: 4px solid #ec4899; box-shadow: 0 0 20px rgba(236, 72, 153, 0.1); }
+        .credit-card:nth-child(1) { animation-delay: 0.6s; }
+        .credit-card:nth-child(2) { animation-delay: 0.8s; }
+        .credit-card:nth-child(3) { animation-delay: 1.0s; }
+
+        @keyframes cardEnter {
+            from { opacity: 0; transform: translateY(50px) rotateX(-20deg); }
+            to { opacity: 1; transform: translateY(0) rotateX(0); }
+        }
+
+        /* Bordas brilhantes específicas */
+        .credit-card.purple { border-bottom: 4px solid #a855f7; }
+        .credit-card.blue   { border-bottom: 4px solid #3b82f6; }
+        .credit-card.pink   { border-bottom: 4px solid #ec4899; }
+
+        /* Efeito de luz no hover */
+        .credit-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .credit-card:hover::before { opacity: 1; }
 
         .credit-role {
             font-size: 0.85rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             color: #71717a;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             display: block;
         }
 
         .credit-name {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: #fff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
         .close-btn {
-            position: absolute;
+            position: fixed;
             top: 40px;
             right: 40px;
-            font-size: 2.5rem;
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 50%;
             color: #fff;
+            font-size: 1.5rem;
             cursor: pointer;
             z-index: 20;
-            opacity: 0.5;
             transition: all 0.3s;
-            background: none;
-            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .close-btn:hover {
-            opacity: 1;
+            background: #fff;
+            color: #000;
             transform: rotate(90deg);
+            box-shadow: 0 0 20px rgba(255,255,255,0.3);
         }
-
-        /* Animação de entrada dos cards (delay) */
-        .credit-card:nth-child(1) { animation: slideUp 0.6s ease-out 0.5s forwards; opacity: 0; }
-        .credit-card:nth-child(2) { animation: slideUp 0.6s ease-out 0.7s forwards; opacity: 0; }
-        .credit-card:nth-child(3) { animation: slideUp 0.6s ease-out 0.9s forwards; opacity: 0; }
 
     </style>
 </head>
@@ -374,7 +431,6 @@
     <!-- VÍDEO DE FUNDO -->
     <video autoplay muted loop id="bg-video">
         <source src="fundo.mp4" type="video/mp4">
-        Seu navegador não suporta vídeo HTML5.
     </video>
 
     <!-- PÁGINA PRINCIPAL -->
@@ -385,7 +441,6 @@
     </header>
 
     <div class="container">
-
         <!-- PARTE 1 -->
         <div id="parte1" class="card theme-purple">
             <div class="card-header">
@@ -448,45 +503,43 @@
                     <div class="compare-card compare-restritiva">
                         <span class="compare-title text-pink-light">Restritiva</span>
                         <p style="font-size: 1.05rem; margin-bottom:10px; color: #ccc;">
-                            <strong>Não usa vírgula.</strong> Restringe ou delimita o substantivo, individualizando-o dentro de um grupo.
+                            <strong>Não usa vírgula.</strong> Restringe ou delimita o substantivo.
                         </p>
                         <div class="example-box" style="margin:0; padding: 20px 25px;">
                             <div class="example-sentence">Os alunos <span class="highlight">que estudam</span> passam.</div>
-                            <div class="explanation-text">
-                                <strong>Sentido:</strong> Apenas uma parte do grupo passa. A oração separa os alunos que estudam dos que não estudam.
-                            </div>
+                            <div class="explanation-text">Só os que estudam passam.</div>
                         </div>
                     </div>
 
                     <div class="compare-card compare-explicativa">
                         <span class="compare-title text-pink-dark">Explicativa</span>
                         <p style="font-size: 1.05rem; margin-bottom:10px; color: #ccc;">
-                            <strong>Usa vírgulas.</strong> Acrecenta uma qualidade, explicação ou comentário sobre um ser já identificado.
+                            <strong>Usa vírgulas.</strong> Acrecenta uma qualidade ou comentário.
                         </p>
                         <div class="example-box" style="margin:0; padding: 20px 25px;">
                             <div class="example-sentence">Os alunos, <span class="highlight">que estudam</span>, passam.</div>
-                            <div class="explanation-text">
-                                <strong>Sentido:</strong> Todos os alunos passam. O fato de estudarem é apenas uma informação extra acrescentada à frase.
-                            </div>
+                            <div class="explanation-text">Todos passam (detalhe extra).</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 
-    <!-- TELA DE AGRADECIMENTO (TECLA 4) -->
+    <!-- TELA DE AGRADECIMENTO ÉPICA (TECLA 4) -->
     <div id="agradecimento-modal" class="modal-overlay">
-        <!-- Partículas de fundo -->
-        <div class="particles" id="particles-container"></div>
+        <!-- Aurora de fundo -->
+        <div class="aurora-bg"></div>
+        
+        <!-- Confetti -->
+        <div id="confetti-container"></div>
 
         <!-- Botão Fechar -->
-        <button class="close-btn" onclick="closeModal()">×</button>
+        <button class="close-btn" onclick="closeModal()">✕</button>
 
         <div class="modal-content">
             <h2 class="modal-title">Obrigado</h2>
-            <p class="modal-subtitle">Apresentação Finalizada</p>
+            <p class="modal-subtitle">Pela Atenção</p>
 
             <div class="credits-container">
                 <div class="credit-card purple">
@@ -508,21 +561,17 @@
     </div>
 
     <script>
-        // --- Navegação e Lógica do Modal ---
         const modal = document.getElementById('agradecimento-modal');
-        const particlesContainer = document.getElementById('particles-container');
+        const confettiContainer = document.getElementById('confetti-container');
 
         document.addEventListener('keydown', function(event) {
-            // Tecla 4 abre o modal
             if (event.key === '4' && !modal.classList.contains('active')) {
                 modal.classList.add('active');
-                createParticles(); // Cria as partículas ao abrir
+                createConfetti(150); // Explosão de 150 confetes
             }
-            // Escape fecha o modal
             else if (event.key === 'Escape') {
                 closeModal();
             }
-            // Navegação normal (1, 2, 3) só funciona se modal estiver fechado
             else if (!modal.classList.contains('active')) {
                 if (event.key === '1') document.getElementById('parte1').scrollIntoView({ behavior: 'smooth' });
                 else if (event.key === '2') document.getElementById('parte2').scrollIntoView({ behavior: 'smooth' });
@@ -532,39 +581,40 @@
 
         function closeModal() {
             modal.classList.remove('active');
-            // Limpa partículas ao fechar para não pesar o navegador
-            particlesContainer.innerHTML = '';
+            confettiContainer.innerHTML = '';
         }
 
-        // Fechar clicando fora
         modal.addEventListener('click', function(e) {
             if (e.target === modal) closeModal();
         });
 
-        // --- Gerador de Partículas Animadas ---
-        function createParticles() {
-            const colors = ['#a855f7', '#3b82f6', '#ec4899', '#ffffff'];
+        // Gerador de Confetti
+        function createConfetti(count) {
+            const colors = ['#a855f7', '#3b82f6', '#ec4899', '#ffffff', '#d1d5db'];
             
-            // Cria 30 partículas
-            for (let i = 0; i < 30; i++) {
-                const p = document.createElement('div');
-                p.classList.add('particle');
+            for (let i = 0; i < count; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
                 
-                // Configurações aleatórias
-                const size = Math.random() * 15 + 5; // Tamanho entre 5 e 20px
-                const left = Math.random() * 100; // Posição horizontal
-                const duration = Math.random() * 5 + 5; // Duração entre 5s e 10s
-                const delay = Math.random() * 5; // Atraso inicial
-                const color = colors[Math.floor(Math.random() * colors.length)];
-
-                p.style.width = `${size}px`;
-                p.style.height = `${size}px`;
-                p.style.left = `${left}%`;
-                p.style.background = color;
-                p.style.animationDuration = `${duration}s`;
-                p.style.animationDelay = `${delay}s`;
-
-                particlesContainer.appendChild(p);
+                const size = Math.random() * 10 + 5;
+                const bgColor = colors[Math.floor(Math.random() * colors.length)];
+                const left = Math.random() * 100;
+                const duration = Math.random() * 3 + 2;
+                const delay = Math.random() * 0.5;
+                
+                // Formas variadas (quadrado, retângulo, círculo)
+                const shape = Math.random();
+                if (shape < 0.33) confetti.style.borderRadius = '50%';
+                else if (shape < 0.66) confetti.style.width = '5px';
+                
+                confetti.style.width = `${size}px`;
+                confetti.style.height = `${size}px`;
+                confetti.style.background = bgColor;
+                confetti.style.left = `${left}%`;
+                confetti.style.animationDuration = `${duration}s`;
+                confetti.style.animationDelay = `${delay}s`;
+                
+                confettiContainer.appendChild(confetti);
             }
         }
     </script>
