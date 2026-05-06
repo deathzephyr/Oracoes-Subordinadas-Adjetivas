@@ -28,6 +28,7 @@
                 linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
             background-size: 40px 40px;
+            overflow-x: hidden;
         }
 
         /* --- Vídeo de Fundo --- */
@@ -203,22 +204,24 @@
         .text-pink-light { color: #f9a8d4; } 
         .text-pink-dark { color: #f472b6; }
 
-        /* --- ESTILO DO MODAL DE AGRADECIMENTO --- */
+        /* ==========================================
+           NOVO ESTILO: AGRADECIMENTO INCRÍVEL
+           ========================================== */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.95);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 1000;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.5s ease;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
         }
 
         .modal-overlay.active {
@@ -226,83 +229,144 @@
             visibility: visible;
         }
 
+        /* Fundo animado com "bolhas" */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            bottom: -100px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.2;
+            animation: floatUp linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            50% { opacity: 0.4; }
+            100% { transform: translateY(-120vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* Conteúdo Central */
         .modal-content {
-            background: rgba(24, 24, 27, 0.95);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 30px;
-            padding: 60px;
-            max-width: 700px;
-            text-align: center;
             position: relative;
-            box-shadow: 0 0 100px rgba(168, 85, 247, 0.2), 0 0 100px rgba(59, 130, 246, 0.2);
-            transform: scale(0.8);
-            transition: transform 0.5s ease;
+            z-index: 10;
+            text-align: center;
+            transform: scale(0.7) translateY(50px);
+            opacity: 0;
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
         }
 
         .modal-overlay.active .modal-content {
-            transform: scale(1);
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 25px;
-            font-size: 2rem;
-            color: #71717a;
-            cursor: pointer;
-            transition: color 0.3s, transform 0.3s;
-        }
-
-        .close-btn:hover {
-            color: #fff;
-            transform: rotate(90deg);
+            transform: scale(1) translateY(0);
+            opacity: 1;
         }
 
         .modal-title {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            /* Gradiente com as 3 cores do projeto */
+            font-size: 6rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 5px;
             background: linear-gradient(to right, #a855f7, #3b82f6, #ec4899);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 50px rgba(168, 85, 247, 0.5);
+            margin-bottom: 20px;
+            animation: textGlow 3s infinite alternate;
         }
 
-        .modal-body-text {
-            font-size: 1.3rem;
-            color: #d4d4d8;
-            margin-bottom: 40px;
+        @keyframes textGlow {
+            0% { filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.6)); }
+            50% { filter: drop-shadow(0 0 40px rgba(59, 130, 246, 0.8)); }
+            100% { filter: drop-shadow(0 0 20px rgba(236, 72, 153, 0.6)); }
         }
 
-        .team-list {
+        .modal-subtitle {
+            font-size: 1.5rem;
+            color: #71717a;
+            margin-bottom: 60px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        /* Créditos do Time */
+        .credits-container {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 40px;
             flex-wrap: wrap;
         }
 
-        .team-member {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 15px 25px;
-            border-radius: 15px;
-            font-weight: 600;
-            color: #fff;
-            font-family: 'Space Grotesk', sans-serif;
+        .credit-card {
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 20px;
+            width: 200px;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        .heart-icon {
-            font-size: 3rem;
-            margin-top: 30px;
-            animation: pulse 1.5s infinite;
+        .credit-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.05);
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
+        /* Cores específicas para cada membro no agradecimento */
+        .credit-card.purple { border-top: 4px solid #a855f7; box-shadow: 0 0 20px rgba(168, 85, 247, 0.1); }
+        .credit-card.blue   { border-top: 4px solid #3b82f6; box-shadow: 0 0 20px rgba(59, 130, 246, 0.1); }
+        .credit-card.pink   { border-top: 4px solid #ec4899; box-shadow: 0 0 20px rgba(236, 72, 153, 0.1); }
+
+        .credit-role {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #71717a;
+            margin-bottom: 10px;
+            display: block;
         }
+
+        .credit-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            font-size: 2.5rem;
+            color: #fff;
+            cursor: pointer;
+            z-index: 20;
+            opacity: 0.5;
+            transition: all 0.3s;
+            background: none;
+            border: none;
+        }
+
+        .close-btn:hover {
+            opacity: 1;
+            transform: rotate(90deg);
+        }
+
+        /* Animação de entrada dos cards (delay) */
+        .credit-card:nth-child(1) { animation: slideUp 0.6s ease-out 0.5s forwards; opacity: 0; }
+        .credit-card:nth-child(2) { animation: slideUp 0.6s ease-out 0.7s forwards; opacity: 0; }
+        .credit-card:nth-child(3) { animation: slideUp 0.6s ease-out 0.9s forwards; opacity: 0; }
+
     </style>
 </head>
 <body>
@@ -317,7 +381,7 @@
     <header>
         <h1>Orações Subordinadas Adjetivas</h1>
         <p>Uma jornada pela gramática</p>
-        <div class="hint">Dica: Pressione <span>1</span>, <span>2</span>, <span>3</span> ou <span>4</span> para ver o agradecimento.</div>
+        <div class="hint">Navegação: <span>1</span>, <span>2</span>, <span>3</span> | Finalizar: <span>4</span></div>
     </header>
 
     <div class="container">
@@ -412,61 +476,97 @@
 
     </div>
 
-    <!-- MODAL DE AGRADECIMENTO (TECLA 4) -->
+    <!-- TELA DE AGRADECIMENTO (TECLA 4) -->
     <div id="agradecimento-modal" class="modal-overlay">
-        <div class="modal-content">
-            <div class="close-btn" onclick="closeModal()">&times;</div>
-            <h2 class="modal-title">Obrigado!</h2>
-            <p class="modal-body-text">
-                Agradecemos a atenção de todos durante a apresentação sobre Orações Subordinadas Adjetivas. Esperamos que o conteúdo tenha sido esclarecedor!
-            </p>
-            
-            <div class="team-list">
-                <div class="team-member">Kamila Santos</div>
-                <div class="team-member">Luan Dhony</div>
-                <div class="team-member">Larissa Régis</div>
-            </div>
+        <!-- Partículas de fundo -->
+        <div class="particles" id="particles-container"></div>
 
-            <div class="heart-icon">💜</div>
+        <!-- Botão Fechar -->
+        <button class="close-btn" onclick="closeModal()">×</button>
+
+        <div class="modal-content">
+            <h2 class="modal-title">Obrigado</h2>
+            <p class="modal-subtitle">Apresentação Finalizada</p>
+
+            <div class="credits-container">
+                <div class="credit-card purple">
+                    <span class="credit-role">Conceito</span>
+                    <span class="credit-name">Kamila Santos</span>
+                </div>
+
+                <div class="credit-card blue">
+                    <span class="credit-role">Exemplos</span>
+                    <span class="credit-name">Luan Dhony</span>
+                </div>
+
+                <div class="credit-card pink">
+                    <span class="credit-role">Explicação</span>
+                    <span class="credit-name">Larissa Régis</span>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        // Navegação pelas teclas
-        document.addEventListener('keydown', function(event) {
-            const modal = document.getElementById('agradecimento-modal');
+        // --- Navegação e Lógica do Modal ---
+        const modal = document.getElementById('agradecimento-modal');
+        const particlesContainer = document.getElementById('particles-container');
 
-            // Tecla 4 abre o modal (se estiver fechado)
+        document.addEventListener('keydown', function(event) {
+            // Tecla 4 abre o modal
             if (event.key === '4' && !modal.classList.contains('active')) {
                 modal.classList.add('active');
+                createParticles(); // Cria as partículas ao abrir
             }
-            // Tecla Escape fecha o modal
+            // Escape fecha o modal
             else if (event.key === 'Escape') {
                 closeModal();
             }
-            // Navegação normal se o modal não estiver aberto
+            // Navegação normal (1, 2, 3) só funciona se modal estiver fechado
             else if (!modal.classList.contains('active')) {
-                if (event.key === '1') {
-                    document.getElementById('parte1').scrollIntoView({ behavior: 'smooth' });
-                } else if (event.key === '2') {
-                    document.getElementById('parte2').scrollIntoView({ behavior: 'smooth' });
-                } else if (event.key === '3') {
-                    document.getElementById('parte3').scrollIntoView({ behavior: 'smooth' });
-                }
+                if (event.key === '1') document.getElementById('parte1').scrollIntoView({ behavior: 'smooth' });
+                else if (event.key === '2') document.getElementById('parte2').scrollIntoView({ behavior: 'smooth' });
+                else if (event.key === '3') document.getElementById('parte3').scrollIntoView({ behavior: 'smooth' });
             }
         });
 
-        // Função para fechar o modal clicando no X ou fora
         function closeModal() {
-            document.getElementById('agradecimento-modal').classList.remove('active');
+            modal.classList.remove('active');
+            // Limpa partículas ao fechar para não pesar o navegador
+            particlesContainer.innerHTML = '';
         }
 
-        // Fechar clicando fora do conteúdo
-        document.getElementById('agradecimento-modal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
+        // Fechar clicando fora
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) closeModal();
         });
+
+        // --- Gerador de Partículas Animadas ---
+        function createParticles() {
+            const colors = ['#a855f7', '#3b82f6', '#ec4899', '#ffffff'];
+            
+            // Cria 30 partículas
+            for (let i = 0; i < 30; i++) {
+                const p = document.createElement('div');
+                p.classList.add('particle');
+                
+                // Configurações aleatórias
+                const size = Math.random() * 15 + 5; // Tamanho entre 5 e 20px
+                const left = Math.random() * 100; // Posição horizontal
+                const duration = Math.random() * 5 + 5; // Duração entre 5s e 10s
+                const delay = Math.random() * 5; // Atraso inicial
+                const color = colors[Math.floor(Math.random() * colors.length)];
+
+                p.style.width = `${size}px`;
+                p.style.height = `${size}px`;
+                p.style.left = `${left}%`;
+                p.style.background = color;
+                p.style.animationDuration = `${duration}s`;
+                p.style.animationDelay = `${delay}s`;
+
+                particlesContainer.appendChild(p);
+            }
+        }
     </script>
 </body>
 </html>
