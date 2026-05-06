@@ -22,26 +22,24 @@
             color: #e1e1e6;
             line-height: 1.7;
             min-height: 100vh;
-            position: relative; /* Para o z-index funcionar */
-            /* Fundo semi-transparente para o vídeo aparecer, mas o texto continuar legível */
+            position: relative;
             background-color: rgba(9, 9, 11, 0.85); 
-            /* Mantemos a grid por cima do vídeo também */
             background-image: 
                 linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
             background-size: 40px 40px;
         }
 
-        /* --- Configuração do Vídeo de Fundo --- */
+        /* --- Vídeo de Fundo --- */
         #bg-video {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Cobre toda a tela sem distorcer */
-            z-index: -1; /* Joga o vídeo para trás de tudo */
-            opacity: 0.6; /* Deixa o vídeo um pouco escuro para não brigar com o texto */
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.5;
         }
 
         @keyframes slideUp {
@@ -93,13 +91,13 @@
 
         /* --- Cards --- */
         .card {
-            background: rgba(24, 24, 27, 0.75); /* Levemente mais transparente para pegar o ambiente */
+            background: rgba(24, 24, 27, 0.75);
             border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 24px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             transition: transform 0.4s ease, box-shadow 0.4s ease;
-            backdrop-filter: blur(8px); /* Blur mais forte para destacar do vídeo */
+            backdrop-filter: blur(8px);
             animation: slideUp 0.8s ease-out forwards;
             opacity: 0;
         }
@@ -148,21 +146,13 @@
         }
 
         /* --- Body --- */
-        .card-body { 
-            padding: 50px; 
-        }
-        
-        .card-body p { 
-            font-size: 1.25rem; 
-            margin-bottom: 25px; 
-            color: #d4d4d8; 
-        }
-        
+        .card-body { padding: 50px; }
+        .card-body p { font-size: 1.25rem; margin-bottom: 25px; color: #d4d4d8; }
         strong { color: #fff; font-weight: 600; }
 
         /* --- Exemplos e Listas --- */
         .example-box {
-            background: rgba(0, 0, 0, 0.6); /* Fundo preto mais sólido para contraste */
+            background: rgba(0, 0, 0, 0.6);
             border-radius: 10px;
             padding: 20px 25px;
             margin: 20px 0;
@@ -173,12 +163,7 @@
         .theme-blue .example-box   { border-left-color: #3b82f6; }
         .theme-pink .example-box   { border-left-color: #ec4899; }
 
-        .example-sentence { 
-            font-family: 'Space Grotesk', sans-serif; 
-            font-size: 1.5rem; 
-            color: #fff; 
-            margin-bottom: 10px; 
-        }
+        .example-sentence { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; color: #fff; margin-bottom: 10px; }
         
         .highlight { font-weight: 700; padding: 2px 8px; border-radius: 4px; }
         .theme-purple .highlight { background: rgba(168, 85, 247, 0.2); color: #d8b4fe; }
@@ -188,13 +173,7 @@
         .explanation-text { font-size: 1.05rem; color: #a1a1aa; font-style: italic; }
 
         ul.custom-list { list-style: none; }
-        ul.custom-list li { 
-            padding-left: 30px; 
-            position: relative; 
-            margin-bottom: 15px; 
-            color: #ccc; 
-            font-size: 1.25rem; 
-        }
+        ul.custom-list li { padding-left: 30px; position: relative; margin-bottom: 15px; color: #ccc; font-size: 1.25rem; }
         ul.custom-list li::before { content: '→'; position: absolute; left: 0; font-size: 1.25rem; }
         
         .theme-purple ul.custom-list li::before { color: #a855f7; }
@@ -208,7 +187,6 @@
             .presenter-role { font-size: 1.8rem; }
             .card-body { padding: 30px; }
             .card-header { padding: 25px 30px; }
-            ul.custom-list li { font-size: 1.1rem; }
         }
 
         .compare-card {
@@ -224,6 +202,107 @@
         .compare-title { font-weight: 700; font-size: 1.3rem; margin-bottom: 15px; display: block; }
         .text-pink-light { color: #f9a8d4; } 
         .text-pink-dark { color: #f472b6; }
+
+        /* --- ESTILO DO MODAL DE AGRADECIMENTO --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: rgba(24, 24, 27, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 60px;
+            max-width: 700px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 0 100px rgba(168, 85, 247, 0.2), 0 0 100px rgba(59, 130, 246, 0.2);
+            transform: scale(0.8);
+            transition: transform 0.5s ease;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 2rem;
+            color: #71717a;
+            cursor: pointer;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .close-btn:hover {
+            color: #fff;
+            transform: rotate(90deg);
+        }
+
+        .modal-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            /* Gradiente com as 3 cores do projeto */
+            background: linear-gradient(to right, #a855f7, #3b82f6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .modal-body-text {
+            font-size: 1.3rem;
+            color: #d4d4d8;
+            margin-bottom: 40px;
+        }
+
+        .team-list {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .team-member {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px 25px;
+            border-radius: 15px;
+            font-weight: 600;
+            color: #fff;
+            font-family: 'Space Grotesk', sans-serif;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .heart-icon {
+            font-size: 3rem;
+            margin-top: 30px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
     </style>
 </head>
 <body>
@@ -234,10 +313,11 @@
         Seu navegador não suporta vídeo HTML5.
     </video>
 
+    <!-- PÁGINA PRINCIPAL -->
     <header>
         <h1>Orações Subordinadas Adjetivas</h1>
         <p>Uma jornada pela gramática</p>
-        <div class="hint">Dica: Pressione <span>1</span>, <span>2</span> ou <span>3</span> no teclado para navegar.</div>
+        <div class="hint">Dica: Pressione <span>1</span>, <span>2</span>, <span>3</span> ou <span>4</span> para ver o agradecimento.</div>
     </header>
 
     <div class="container">
@@ -332,14 +412,59 @@
 
     </div>
 
+    <!-- MODAL DE AGRADECIMENTO (TECLA 4) -->
+    <div id="agradecimento-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="close-btn" onclick="closeModal()">&times;</div>
+            <h2 class="modal-title">Obrigado!</h2>
+            <p class="modal-body-text">
+                Agradecemos a atenção de todos durante a apresentação sobre Orações Subordinadas Adjetivas. Esperamos que o conteúdo tenha sido esclarecedor!
+            </p>
+            
+            <div class="team-list">
+                <div class="team-member">Kamila Santos</div>
+                <div class="team-member">Luan Dhony</div>
+                <div class="team-member">Larissa Régis</div>
+            </div>
+
+            <div class="heart-icon">💜</div>
+        </div>
+    </div>
+
     <script>
+        // Navegação pelas teclas
         document.addEventListener('keydown', function(event) {
-            if (event.key === '1') {
-                document.getElementById('parte1').scrollIntoView({ behavior: 'smooth' });
-            } else if (event.key === '2') {
-                document.getElementById('parte2').scrollIntoView({ behavior: 'smooth' });
-            } else if (event.key === '3') {
-                document.getElementById('parte3').scrollIntoView({ behavior: 'smooth' });
+            const modal = document.getElementById('agradecimento-modal');
+
+            // Tecla 4 abre o modal (se estiver fechado)
+            if (event.key === '4' && !modal.classList.contains('active')) {
+                modal.classList.add('active');
+            }
+            // Tecla Escape fecha o modal
+            else if (event.key === 'Escape') {
+                closeModal();
+            }
+            // Navegação normal se o modal não estiver aberto
+            else if (!modal.classList.contains('active')) {
+                if (event.key === '1') {
+                    document.getElementById('parte1').scrollIntoView({ behavior: 'smooth' });
+                } else if (event.key === '2') {
+                    document.getElementById('parte2').scrollIntoView({ behavior: 'smooth' });
+                } else if (event.key === '3') {
+                    document.getElementById('parte3').scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+
+        // Função para fechar o modal clicando no X ou fora
+        function closeModal() {
+            document.getElementById('agradecimento-modal').classList.remove('active');
+        }
+
+        // Fechar clicando fora do conteúdo
+        document.getElementById('agradecimento-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
             }
         });
     </script>
