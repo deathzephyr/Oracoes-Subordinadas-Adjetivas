@@ -15,17 +15,13 @@
             padding: 0;
         }
 
-        /* Rolagem suave */
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Inter', sans-serif;
             background-color: #09090b;
             color: #e1e1e6;
             line-height: 1.7;
-            /* Fundo com Grid sutil */
             background-image: 
                 linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
@@ -33,90 +29,77 @@
             min-height: 100vh;
         }
 
-        /* Animação de entrada */
         @keyframes slideUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- Cabeçalho Principal --- */
+        /* --- Cabeçalho --- */
         header {
-            padding: 60px 20px;
+            padding: 80px 20px;
             text-align: center;
             background: radial-gradient(circle at center, #1a1a24 0%, #09090b 100%);
-            position: relative;
         }
 
         header h1 {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(2rem, 5vw, 3.8rem);
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
             color: #fff;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             text-transform: uppercase;
             letter-spacing: 3px;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
         }
 
-        header p {
-            color: #71717a;
-            font-size: 1.1rem;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
-        }
+        header p { color: #71717a; font-size: 1.3rem; letter-spacing: 1px; margin-bottom: 5px; }
 
         .hint {
             display: inline-block;
-            margin-top: 15px;
-            font-size: 0.85rem;
+            margin-top: 20px;
+            font-size: 0.9rem;
             color: #52525b;
             border: 1px solid #27272a;
-            padding: 8px 16px;
+            padding: 10px 20px;
             border-radius: 20px;
             background: rgba(0,0,0,0.3);
         }
-
         .hint span { color: #a1a1aa; font-weight: bold; }
 
-        /* --- Container --- */
+        /* --- Container (AUMENTADO) --- */
         .container {
-            max-width: 1000px;
+            max-width: 1200px; /* Aumentei de 1000px para 1200px */
             margin: 0 auto;
-            padding: 0 20px 80px 20px;
+            padding: 0 30px 100px 30px; /* Mais padding lateral e inferior */
             display: flex;
             flex-direction: column;
-            gap: 50px;
+            gap: 60px; /* Maior espaçamento entre cards */
         }
 
-        /* --- Estilo dos Cards --- */
+        /* --- Cards (AUMENTADOS) --- */
         .card {
             background: rgba(24, 24, 27, 0.7);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
+            border-radius: 24px; /* Bordas um pouco maiores */
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             transition: transform 0.4s ease, box-shadow 0.4s ease;
             backdrop-filter: blur(5px);
             animation: slideUp 0.8s ease-out forwards;
-            opacity: 0; /* Para animação */
+            opacity: 0;
         }
 
-        .card:hover {
-            transform: translateY(-8px) scale(1.01);
-        }
+        .card:hover { transform: translateY(-8px) scale(1.01); }
         
-        /* Efeitos de brilho no hover por cor */
-        .theme-purple:hover { box-shadow: 0 0 40px rgba(168, 85, 247, 0.3); border-color: rgba(168, 85, 247, 0.3); }
-        .theme-blue:hover   { box-shadow: 0 0 40px rgba(59, 130, 246, 0.3); border-color: rgba(59, 130, 246, 0.3); }
-        .theme-pink:hover   { box-shadow: 0 0 40px rgba(236, 72, 153, 0.3); border-color: rgba(236, 72, 153, 0.3); }
+        .theme-purple:hover { box-shadow: 0 0 50px rgba(168, 85, 247, 0.3); border-color: rgba(168, 85, 247, 0.3); }
+        .theme-blue:hover   { box-shadow: 0 0 50px rgba(59, 130, 246, 0.3); border-color: rgba(59, 130, 246, 0.3); }
+        .theme-pink:hover   { box-shadow: 0 0 50px rgba(236, 72, 153, 0.3); border-color: rgba(236, 72, 153, 0.3); }
 
-        /* Atraso na animação (efeito cascata) */
         .card:nth-child(1) { animation-delay: 0.2s; }
         .card:nth-child(2) { animation-delay: 0.4s; }
         .card:nth-child(3) { animation-delay: 0.6s; }
 
-        /* --- CABEÇALHO COLORIDO --- */
+        /* --- Header do Card --- */
         .card-header {
-            padding: 25px 35px;
+            padding: 35px 50px; /* Aumentei o padding horizontal */
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -124,154 +107,97 @@
             border-bottom: 1px solid rgba(0,0,0,0.2);
         }
 
-        /* Cores Fortes */
         .theme-purple .card-header { background: linear-gradient(135deg, #6d28d9, #a855f7); }
         .theme-blue .card-header   { background: linear-gradient(135deg, #1d4ed8, #3b82f6); }
         .theme-pink .card-header   { background: linear-gradient(135deg, #be185d, #ec4899); }
 
-        .presenter-info {
-            display: flex;
-            flex-direction: column;
-            z-index: 2;
-        }
-
-        .presenter-name {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            opacity: 0.85;
-            font-weight: 600;
-        }
-
-        .presenter-role {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2rem;
-            font-weight: 700;
-            line-height: 1.1;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        .presenter-info { display: flex; flex-direction: column; z-index: 2; }
+        .presenter-name { font-size: 1rem; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.85; font-weight: 600; }
+        
+        .presenter-role { 
+            font-family: 'Space Grotesk', sans-serif; 
+            font-size: 2.5rem; /* Aumentei de 2rem para 2.5rem */
+            font-weight: 700; 
+            line-height: 1.1; 
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2); 
         }
 
         .part-number {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 4rem;
-            font-weight: 800;
-            opacity: 0.2;
-            position: absolute;
-            right: 20px;
-            bottom: -10px;
-            color: white;
-            z-index: 1;
+            font-size: 5rem; /* Aumentei de 4rem para 5rem */
+            font-weight: 800; opacity: 0.2;
+            position: absolute; right: 30px; bottom: -15px;
+            color: white; z-index: 1;
         }
 
-        /* --- Conteúdo do Card --- */
-        .card-body {
-            padding: 35px;
-            position: relative;
-        }
-
-        .card-body p {
-            font-size: 1.15rem;
-            margin-bottom: 20px;
-            color: #d4d4d8;
-        }
-
-        strong {
-            color: #fff;
-            font-weight: 600;
-        }
-
-        /* --- Exemplos Estilo Terminal --- */
-        .example-box {
-            background: #000;
-            border-radius: 8px;
-            padding: 20px 25px;
-            margin: 15px 0;
-            border-left: 5px solid transparent;
-            transition: background 0.3s;
+        /* --- Body (AUMENTADO) --- */
+        .card-body { 
+            padding: 50px; /* Aumentei de 35px para 50px */ 
         }
         
-        .example-box:hover { background: #0a0a0a; }
+        .card-body p { 
+            font-size: 1.25rem; /* Aumentei de 1.15rem para 1.25rem */
+            margin-bottom: 25px; 
+            color: #d4d4d8; 
+        }
+        
+        strong { color: #fff; font-weight: 600; }
 
-        /* Bordas laterais coloridas */
+        /* --- Exemplos --- */
+        .example-box {
+            background: #000;
+            border-radius: 10px;
+            padding: 25px 30px; /* Aumentei padding */
+            margin: 20px 0;
+            border-left: 6px solid transparent; /* Borda mais grossa */
+        }
+        
         .theme-purple .example-box { border-left-color: #a855f7; }
         .theme-blue .example-box   { border-left-color: #3b82f6; }
         .theme-pink .example-box   { border-left-color: #ec4899; }
 
-        .example-sentence {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.5rem;
-            color: #fff;
-            margin-bottom: 8px;
+        .example-sentence { 
+            font-family: 'Space Grotesk', sans-serif; 
+            font-size: 1.8rem; /* Aumentei de 1.5rem para 1.8rem */
+            color: #fff; 
+            margin-bottom: 10px; 
         }
-
-        .highlight {
-            font-weight: 700;
-            padding: 2px 6px;
-            border-radius: 4px;
-        }
-
-        /* Destaques coloridos */
+        
+        .highlight { font-weight: 700; padding: 2px 8px; border-radius: 4px; }
         .theme-purple .highlight { background: rgba(168, 85, 247, 0.2); color: #d8b4fe; }
         .theme-blue .highlight   { background: rgba(59, 130, 246, 0.2); color: #93c5fd; }
         .theme-pink .highlight   { background: rgba(236, 72, 153, 0.2); color: #f9a8d4; }
 
-        .explanation-text {
-            font-size: 0.95rem;
-            color: #71717a;
-            font-style: italic;
-        }
+        .explanation-text { font-size: 1.05rem; color: #71717a; font-style: italic; }
 
-        /* --- Comparação (Parte 3) --- */
-        .comparison-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-top: 20px;
-        }
+        /* --- Comparação --- */
+        .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px; }
 
         @media (max-width: 768px) {
             .comparison-grid { grid-template-columns: 1fr; }
-            .presenter-role { font-size: 1.5rem; }
+            .presenter-role { font-size: 1.8rem; }
+            .card-body { padding: 30px; }
+            .card-header { padding: 25px 30px; }
         }
 
         .compare-card {
             background: rgba(39, 39, 42, 0.5);
-            padding: 20px;
-            border-radius: 12px;
-            border-top: 4px solid transparent;
-            transition: transform 0.3s;
+            padding: 30px; /* Aumentei de 20px para 30px */
+            border-radius: 16px;
+            border-top: 5px solid transparent;
         }
-        
-        .compare-card:hover { transform: translateY(-3px); }
 
-        /* Tema ROSA para a comparação */
-        .compare-restritiva { border-top-color: #f472b6; } /* Rosa claro */
-        .compare-explicativa { border-top-color: #be185d; } /* Rosa escuro */
+        .compare-restritiva { border-top-color: #f472b6; }
+        .compare-explicativa { border-top-color: #be185d; }
 
-        .compare-title {
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-            display: block;
-        }
-        
+        .compare-title { font-weight: 700; font-size: 1.3rem; margin-bottom: 15px; display: block; }
         .text-pink-light { color: #f9a8d4; } 
         .text-pink-dark { color: #f472b6; }
 
         /* --- Listas --- */
         ul.custom-list { list-style: none; }
-        ul.custom-list li {
-            padding-left: 25px;
-            position: relative;
-            margin-bottom: 12px;
-            color: #ccc;
-        }
-        ul.custom-list li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            font-size: 1rem;
-        }
+        ul.custom-list li { padding-left: 30px; position: relative; margin-bottom: 15px; color: #ccc; font-size: 1.1rem; }
+        ul.custom-list li::before { content: '→'; position: absolute; left: 0; font-size: 1.1rem; }
         .theme-purple ul.custom-list li::before { color: #a855f7; }
         .theme-blue ul.custom-list li::before   { color: #3b82f6; }
     </style>
@@ -286,7 +212,7 @@
 
     <div class="container">
 
-        <!-- PARTE 1: KAMILA SANTOS (ROXO) -->
+        <!-- PARTE 1 -->
         <div id="parte1" class="card theme-purple">
             <div class="card-header">
                 <div class="presenter-info">
@@ -307,7 +233,7 @@
             </div>
         </div>
 
-        <!-- PARTE 2: LUAN DHONY (AZUL) -->
+        <!-- PARTE 2 -->
         <div id="parte2" class="card theme-blue">
             <div class="card-header">
                 <div class="presenter-info">
@@ -317,54 +243,57 @@
                 <div class="part-number">02</div>
             </div>
             <div class="card-body">
-                
                 <div class="example-box">
                     <div class="example-sentence">O filme <span class="highlight">que assistimos</span> era longo.</div>
                     <div class="explanation-text">Caracteriza o filme.</div>
                 </div>
-
                 <div class="example-box">
                     <div class="example-sentence">A rua <span class="highlight">onde eu moro</span> é tranquila.</div>
                     <div class="explanation-text">Indica o lugar.</div>
                 </div>
-
                 <div class="example-box">
                     <div class="example-sentence">O homem <span class="highlight">cujo carro foi roubado</span> está triste.</div>
                     <div class="explanation-text">Indica posse.</div>
                 </div>
-
             </div>
         </div>
 
-        <!-- PARTE 3: LARISSA RÉGIS (ROSA) -->
+        <!-- PARTE 3 -->
         <div id="parte3" class="card theme-pink">
             <div class="card-header">
                 <div class="presenter-info">
                     <span class="presenter-name">Apresentado por Larissa Régis</span>
-                    <!-- TÍTULO CORRIGIDO PARA "EXPLICAÇÃO" -->
                     <span class="presenter-role">Explicação</span>
                 </div>
                 <div class="part-number">03</div>
             </div>
             <div class="card-body">
-                <p>Na língua portuguesa, a pontuação altera o sentido. As adjetivas dividem-se em dois tipos:</p>
+                <p>As orações adjetivas dividem-se em dois tipos, conforme a pontuação e o sentido que transmitem:</p>
                 
                 <div class="comparison-grid">
                     <div class="compare-card compare-restritiva">
                         <span class="compare-title text-pink-light">Restritiva</span>
-                        <p style="font-size: 0.95rem; margin-bottom:10px; color: #ccc;">Não usa vírgula. Restringe ou limita o substantivo.</p>
-                        <div class="example-box" style="margin:0; padding: 15px 20px;">
-                            <div class="example-sentence" style="font-size: 1.3rem;">Os alunos <span class="highlight">que estudam</span> passam.</div>
-                            <div class="explanation-text">Sentido: Apenas os alunos que estudam passam (os que não estudam, não).</div>
+                        <p style="font-size: 1.05rem; margin-bottom:10px; color: #ccc;">
+                            <strong>Não usa vírgula.</strong> Restringe ou delimita o substantivo, individualizando-o dentro de um grupo.
+                        </p>
+                        <div class="example-box" style="margin:0; padding: 20px 25px;">
+                            <div class="example-sentence" style="font-size: 1.5rem;">Os alunos <span class="highlight">que estudam</span> passam.</div>
+                            <div class="explanation-text">
+                                <strong>Sentido:</strong> Apenas uma parte do grupo passa. A oração separa os alunos que estudam dos que não estudam.
+                            </div>
                         </div>
                     </div>
 
                     <div class="compare-card compare-explicativa">
                         <span class="compare-title text-pink-dark">Explicativa</span>
-                        <p style="font-size: 0.95rem; margin-bottom:10px; color: #ccc;">Usa vírgulas. Apenas acrescenta uma informação extra.</p>
-                        <div class="example-box" style="margin:0; padding: 15px 20px;">
-                            <div class="example-sentence" style="font-size: 1.3rem;">Os alunos, <span class="highlight">que estudam</span>, passam.</div>
-                            <div class="explanation-text">Sentido: Todos os alunos passam, e o fato de estudarem é apenas um detalhe sobre eles.</div>
+                        <p style="font-size: 1.05rem; margin-bottom:10px; color: #ccc;">
+                            <strong>Usa vírgulas.</strong> Acrecenta uma qualidade, explicação ou comentário sobre um ser já identificado.
+                        </p>
+                        <div class="example-box" style="margin:0; padding: 20px 25px;">
+                            <div class="example-sentence" style="font-size: 1.5rem;">Os alunos, <span class="highlight">que estudam</span>, passam.</div>
+                            <div class="explanation-text">
+                                <strong>Sentido:</strong> Todos os alunos passam. O fato de estudarem é apenas uma informação extra acrescentada à frase.
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -373,7 +302,6 @@
 
     </div>
 
-    <!-- Script para navegação pelo teclado -->
     <script>
         document.addEventListener('keydown', function(event) {
             if (event.key === '1') {
@@ -385,6 +313,5 @@
             }
         });
     </script>
-
 </body>
 </html>
